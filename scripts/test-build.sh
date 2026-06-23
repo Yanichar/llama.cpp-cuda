@@ -30,7 +30,7 @@ case $CUDA_VERSION in
         ;;
     12.8.1)
         CUDA_TAG="12.8.1-cudnn-devel-ubuntu22.04"
-        ARCHITECTURES="75;80;86;89;90;100;120"
+        ARCHITECTURES="61"
         ;;
     12.9.1)
         CUDA_TAG="12.9.1-cudnn-devel-ubuntu22.04"
@@ -42,7 +42,7 @@ case $CUDA_VERSION in
         ;;
     *)
         echo -e "${RED}Error: Unsupported CUDA version $CUDA_VERSION${NC}"
-        echo "Supported versions: 12.4.1, 12.6.3, 12.8.1, 12.9.1, 13.0.1"
+        echo "Supported versions: 12.4.1, 12.6.3, 12.8.1, 12.9.1, 13.0.1 (only 12.8 is configured for sm_61)"
         exit 1
         ;;
 esac

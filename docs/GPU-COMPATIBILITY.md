@@ -23,56 +23,18 @@ if torch.cuda.is_available():
 
 ## Compute Capability Breakdown
 
-### 7.5 (Turing)
-- Tesla T4
-- GeForce RTX 2060, 2070, 2080, 2080 Ti
-- Quadro RTX 4000, 5000, 6000, 8000
-- GeForce GTX 1650, 1660 series
+### 6.1 (Pascal)
+- NVIDIA Titan XP
+- Tesla P40
+- GeForce GTX 1080, GTX 1070, GTX 1060, GTX 1050
 
-**CUDA Support:** 12.4+
-
-### 8.0 (Ampere - Data Center)
-- NVIDIA A100
-- NVIDIA A30
-
-**CUDA Support:** 12.4+
-
-### 8.6 (Ampere - Consumer/Pro)
-- GeForce RTX 3050, 3060, 3070, 3080, 3090
-- RTX A2000, A4000, A5000, A6000
-- NVIDIA A10, A40
-
-**CUDA Support:** 12.4+
-
-### 8.9 (Ada Lovelace / Hopper L-series)
-- GeForce RTX 4060, 4070, 4080, 4090
-- RTX 6000 Ada
-- NVIDIA L4, L40, L40S
-
-**CUDA Support:** 12.4+
-
-### 9.0 (Hopper)
-- NVIDIA H100
-- NVIDIA H200
-
-**CUDA Support:** 12.4+
-
-### 10.0 (Blackwell)
-- NVIDIA B100
-- NVIDIA B200
-- NVIDIA GB200
-
-**CUDA Support:** 12.8+ (minimum)
+**CUDA Support:** 12.8 (via this build only)
 
 ## Minimum CUDA Driver Versions
 
 | CUDA Toolkit | Minimum Driver (Linux) | Minimum Driver (Windows) |
 |--------------|------------------------|--------------------------|
-| 12.4         | 550.54.15             | 552.22                   |
-| 12.6         | 560.28.03             | 561.09                   |
 | 12.8         | 570.15                | 571.00                   |
-| 12.9         | 580.13                | 581.00                   |
-| 13.0         | 590.xx                | 591.xx                   |
 
 ## Checking Your Driver Version
 
@@ -90,55 +52,27 @@ nvidia-smi
 
 ## CUDA Compatibility Matrix
 
-| GPU Architecture | Compute Cap. | CUDA 12.4 | CUDA 12.6 | CUDA 12.8 | CUDA 12.9 | CUDA 13.0 |
-|-----------------|--------------|-----------|-----------|-----------|-----------|-----------|
-| Turing          | 7.5          | ✅        | ✅        | ✅        | ✅        | ✅        |
-| Ampere (DC)     | 8.0          | ✅        | ✅        | ✅        | ✅        | ✅        |
-| Ampere          | 8.6          | ✅        | ✅        | ✅        | ✅        | ✅        |
-| Ada/Hopper-L    | 8.9          | ✅        | ✅        | ✅        | ✅        | ✅        |
-| Hopper          | 9.0          | ✅        | ✅        | ✅        | ✅        | ✅        |
-| Blackwell       | 10.0         | ❌        | ❌        | ✅        | ✅        | ✅        |
+| GPU Architecture | Compute Cap. | CUDA 12.8 |
+|-----------------|--------------|-----------|
+| Pascal          | 6.1          | ✅        |
 
 ## Recommendations by Use Case
 
-### Personal Desktop/Workstation (RTX 20/30/40 series)
-**Recommended:** CUDA 12.6.3 or 12.8.0
-- Widest driver compatibility
-- Stable and well-tested
-- Supports all desktop GPUs
-
-### Data Center (A100, H100)
-**Recommended:** CUDA 12.8.0 or 12.9.0
-- Latest optimizations for data center GPUs
-- Better performance for Hopper architecture
-
-### Latest Hardware (Blackwell)
-**Required:** CUDA 12.8.0 or higher
-- Blackwell architecture requires CUDA 12.8+
-- Use CUDA 13.0 for latest features
-
-### Maximum Compatibility (Older GPUs)
-**Recommended:** CUDA 12.4.1
-- Supports older drivers
-- Good for Tesla T4 and RTX 20 series
+### Pascal GPUs (GTX 10xx, Titan XP, Tesla P40)
+**Only available option:** CUDA 12.8
+- This build targets only compute capability 6.1 (Pascal)
+- Use the original upstream repository for builds targeting other architectures
 
 ## Troubleshooting
 
 ### "CUDA driver version is insufficient"
-- Update your NVIDIA driver to meet minimum requirements
-- Or download a build with an older CUDA version
+- Update your NVIDIA driver to meet the minimum requirements for CUDA 12.8 (Driver >= 570.15 Linux / 571.00 Windows)
 
 ### "No CUDA-capable device detected"
-- Check if GPU is properly installed: `nvidia-smi`
+- Check if your Pascal GPU is properly installed: `nvidia-smi`
 - Verify NVIDIA driver is loaded: `lsmod | grep nvidia`
-- Check PCIe connection if recent hardware changes
 
-### Performance issues
-- Ensure correct CUDA version for your GPU architecture
-- For Hopper/Blackwell, use CUDA 12.8+
-- Check GPU utilization: `nvidia-smi dmon`
-
-### Binary not found
+### "Binary not found"
 - Verify you extracted the entire tarball
 - Check permissions: `chmod +x llama-*`
 - Ensure you're in the correct directory

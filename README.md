@@ -7,7 +7,7 @@ This repository automatically builds [llama.cpp](https://github.com/ggml-org/lla
 The official llama.cpp repository does not provide pre-built CUDA binaries. This repository fills that gap by:
 
 - Building llama.cpp with CUDA support for multiple CUDA toolkit versions
-- Supporting a wide range of NVIDIA GPU architectures (compute capability 7.5+)
+- Supporting Pascal GPU architecture (compute capability 6.1, e.g. GTX 10xx, Titan XP, Tesla P40)
 - Automatically tracking upstream llama.cpp releases
 - Providing ready-to-use binaries via GitHub releases
 
@@ -31,15 +31,7 @@ The CUDA compute capabilities below target the runtime GPU and are the same on b
 
 | Compute Capability | GPU Examples |
 |-------------------|--------------|
-| 6.1 | Titan XP, Tesla P40, GTX 10xx |
-| 7.0 | Tesla V100 |
-| 7.5 | Tesla T4, RTX 2000 series, Quadro RTX |
-| 8.0 | A100 |
-| 8.6 | RTX 3000 series |
-| 8.9 | RTX 4000 series, L4, L40 |
-| 9.0 | H100, H200, GH200 |
-| 10.0 | B200, GB200 |
-| 12.0 | RTX Pro series, RTX 5000 series |
+| 6.1 | Titan XP, Tesla P40, GTX 10xx (Pascal) |
 
 ## Usage
 
@@ -84,7 +76,7 @@ cat VERSION.txt
 
 ## System Requirements
 
-- NVIDIA GPU with compute capability 7.5 or higher
+- NVIDIA GPU with compute capability 6.1 (Pascal, e.g. GTX 10xx, Titan XP, Tesla P40)
 - Appropriate NVIDIA driver for your CUDA version:
   - CUDA 12.8+: Driver >= 570.15
 - Linux x86_64 or aarch64 (Ubuntu 22.04 compatible)
